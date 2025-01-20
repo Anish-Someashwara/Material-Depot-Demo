@@ -2,6 +2,7 @@ import * as THREE from "three";
 import Experience from "./Experience.js";
 import { VertexNormalsHelper } from "three/examples/jsm/helpers/VertexNormalsHelper.js";
 import { GUI } from "three/examples/jsm/libs/lil-gui.module.min.js";
+// import {GUI} from 'lil-gui';
 
 
 const BIKE_PARTS = {
@@ -108,6 +109,7 @@ export default class Bike {
 		// this.scene.add( this.rect2 );
 		// this.addHotSpotHelper();
 		// this.addReloadPopup();
+		
 	}
 
 	addHotSpotHelper() {
@@ -168,7 +170,7 @@ export default class Bike {
 		Object.keys(envMaps).forEach((envMapName) => {
 			// console.log(envMapName);
 			const texture = envMaps[envMapName];
-			texture.mapping = THREE.EquirectangularReflectionMapping;
+			texture.mapping = THREE.EquirectangularRefractionMapping ;
 			texture.colorSpace = THREE.LinearSRGBColorSpace;
 		});
 
@@ -180,7 +182,26 @@ export default class Bike {
 		const GlobalEnvTexture = envMaps[`${basePath}/NewGlobalEnvMap.hdr`];
 		GlobalEnvTexture.name = "GlobalEnvMap";
 		this.envTexture = GlobalEnvTexture;
+		// this.scene.background = this.envTexture;
+		this.scene.backgroundIntensity = 0.1;
 
+		// GUI setup
+		const gui = new GUI();
+		const params = {
+			useTexture: false, // Initial state (no texture)
+		};
+
+		// Add toggle for texture
+		gui.add(params, 'useTexture')
+			.name('Toggle Background')
+			.onChange((value) => {
+				if (value) {
+					this.scene.background = this.envTexture; // Set texture as background
+				} else {
+					this.scene.background = null; // Remove background
+				}
+			});
+		
 		// const HeadLightEnvMapTexture = envMaps[`${basePath}/HeadLightGlass.hdr`];
 		// HeadLightEnvMapTexture.name = "HeadLightEnvMap";
 		// this.HeadLightEnvMap = HeadLightEnvMapTexture;
@@ -313,7 +334,7 @@ export default class Bike {
 				if(child.name === "Big_Tile_Face_Opecity"){ 
 					child.material.roughness = 0.1;
 					child.material.metalness = 1;
-					child.material.envMapIntensity = 0.08;
+					child.material.envMapIntensity = 0.1;
 					child.material.specularIntensity = 0.2;
 					child.material._clearcoat = 1;
 					child.material.toneMapped = false;
@@ -347,8 +368,8 @@ export default class Bike {
 		// this.experience.renderer.instance.setClearColor(0xfcfbf7);
 
 		// Deactive loader-logo animation
-		document.getElementById('loader-gif').style.display = 'none'
-		document.getElementById('loadingOverlay').style.backgroundColor = 'transparent'
+		// document.getElementById('loader-gif').style.display = 'none'
+		// document.getElementById('loadingOverlay').style.backgroundColor = 'transparent'
 
 		
 		// this.activateBikeView();
@@ -455,7 +476,8 @@ export default class Bike {
 		this.defaultSeatGroup = new THREE.Group();
 		this.defaultSeatGroup.name = "Default Seat";
 		// this.bike.rotation.x  = Math.PI / 10 ;
-		this.bike.position.set(10, -10, 0);
+		this.bike.position.set(10, 0, 0);
+		// this.bike.rotation.x = Math.PI / 2;
 		this.bike.scale.set(100, 100, 100);
 		this.bike.traverse((child) => {
 			if (child instanceof THREE.Mesh) {
@@ -482,7 +504,7 @@ export default class Bike {
 
 		
 		this.scene.add(this.bike);
-		this.loaders.deactivateLoader();
+		// this.loaders.deactivateLoader();
 
 		// Seat Viewing Angle
 		this.seatViewPoint = new THREE.Mesh(

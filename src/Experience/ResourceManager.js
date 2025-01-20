@@ -46,8 +46,6 @@ export default class ResourceManager {
 
     }
 
-
-
     async loadDummyBikeModel() {
 		// this.uiLoader.hideLoader();
 
@@ -123,7 +121,6 @@ export default class ResourceManager {
 		});
 	}
 
-
     async loadEnvMaps() {
         // **************************** Environment Maps Loading ****************************
     
@@ -151,32 +148,20 @@ export default class ResourceManager {
         }
     }
     
-
-
-
     async loadBikeModel() {
         // **************************** Bike Model Loading ****************************
         try {
             console.log("******** Started BikeModel Loading ********");
-            
             // const gltf = await this.loaders.loadDeEncChunks(18, 0, "/static/models/BikeModel_12-7-24-SplitTextures/BikeModel_12-7-24_Center_v1", true);
             const gltf = await this.loaders.loadGltfByUrl('/static/models/BigTile_20-01-2025_v1.gltf');
-            
-            
-            
             console.log("******** BikeModel Loaded! ✅********");
-
 			this.canvasResources["BikeModel"] = gltf;
 			return gltf; // Return the loaded model
-
         } catch (error) {
             console.log("Some error came while loading Bike Model!", error);
             this.addReloadPopup(error.message);
             throw error; // Re-throw the error to be handled by the caller
         }
-
-
-        
     }
 
 
