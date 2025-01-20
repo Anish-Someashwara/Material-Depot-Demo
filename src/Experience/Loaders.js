@@ -444,7 +444,7 @@ export default class Loaders {
 				},
 				(xhr) => {
 					// console.log(Math.trunc((xhr.loaded / xhr.total) * 100) + "% loaded");
-					console.log(xhr.loaded);
+					// console.log(xhr.loaded);
 					// let debugScreenPtag = document.getElementById('debug-info');
 					// debugScreenPtag.innerHTML = `Loadin: ${(xhr.loaded / xhr.total) * 100} % loaded"`;
 

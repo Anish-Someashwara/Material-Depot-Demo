@@ -307,28 +307,26 @@ export default class Bike {
 
 				child.material.envMap = this.envTexture;
 				child.material.envMapIntensity = 0.14;
-				child.material.needsUpdate = true;
-
-
+				
+				
 				//////////////////////////////////////////////
-				// if(child.name === "2942001" || child.name === 'BrLogo' || child.name === 'Mesh008_1'){ // For TankLogo(2942001), diskbrakeLlogo(BrLogo) and brownSeat(Mesh008_1) sticker logo
-				// 	this.loaders.loadTexture(`${TEXTURE_BASE_PATH}/Lowride_A1.jpg`)
-				// 	.then(texture=>{
-				// 		console.log("logo texture: ", texture)
-				// 		texture.name = "Tank_Logo"
-				// 		texture.colorSpace = THREE.SRGBColorSpace;
-				// 		texture.flipY = false;
-				// 		child.material.color = new THREE.Color(0xffffff) // Diskbrake Logo only visible after giving white color, dont know why, need to confirm with 3d team
-				// 		child.material.map = texture;
-				// 		child.material.needsUpdate = true;
-				// 	})
-				// 	.catch((error)=>{
-				// 		console.log("Some error came while loading textures!", error);
-				// 		this.addReloadPopup(`Some error came while loading textures!, ${error}`);
-				// 		throw error; // Re-throw the error to be handled by the caller
-				// 	})
-				// }
+				if(child.name === "Big_Tile_Face_Opecity"){ 
+					child.material.roughness = 0.1;
+					child.material.metalness = 1;
+					child.material.envMapIntensity = 0.08;
+					child.material.specularIntensity = 0.2;
+					child.material._clearcoat = 1;
+					child.material.toneMapped = false;
+				}
+				if(child.name === "Big_Tile_Back"){ 
+					child.material.toneMapped = true;
+					child.material.roughness = 1;
+					child.material.metalness = 0;
+					child.material.envMapIntensity = 0.25;
+					child.material.specularIntensity = 0;
+				}
 
+				child.material.needsUpdate = true;
 			}
 		});
 
