@@ -332,19 +332,27 @@ export default class Bike {
 				
 				//////////////////////////////////////////////
 				if(child.name === "Big_Tile_Face_Opecity"){ 
-					child.material.roughness = 0.1;
-					child.material.metalness = 1;
-					child.material.envMapIntensity = 0.1;
-					child.material.specularIntensity = 0.2;
-					child.material._clearcoat = 1;
 					child.material.toneMapped = false;
+					child.material.roughness = 0.1;
+					child.material.metalness = 0.05;
+					child.material.envMapIntensity = 0.2;
+					child.material.specularIntensity = 0.2;
+					child.material._clearcoat = 0.02;
 				}
 				if(child.name === "Big_Tile_Back"){ 
 					child.material.toneMapped = true;
 					child.material.roughness = 1;
 					child.material.metalness = 0;
-					child.material.envMapIntensity = 0.25;
+					child.material.aoMapIntensity = 0.5;
+					child.material.envMapIntensity = 0.1;
 					child.material.specularIntensity = 0;
+				}
+					if(child.name === "Big_Tile_Face"){ 
+					child.material.toneMapped = true;
+					child.material.roughness = 1;
+					child.material.metalness = 0.05;
+					child.material.envMapIntensity = 0.12;
+					child.material.specularIntensity = 1;
 				}
 
 				child.material.needsUpdate = true;
