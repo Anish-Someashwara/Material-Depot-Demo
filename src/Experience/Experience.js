@@ -8,7 +8,7 @@ import Lights from './Lights.js';
 import Ground from './Ground.js';
 import UILoader from './UI/UILoader.js';
 import ResourceManager from './ResourceManager.js';
-import DebuggerDatGUI from './DebuggerDatGUI.js';
+// import DebuggerDatGUI from './DebuggerDatGUI.js';
 
 
 
@@ -53,7 +53,7 @@ export default class Experience {
 		this.ground = new Ground();
 		this.bike = new Bike();
 		this.raycasterManager = new RaycasterManager();
-		this.debuggerDatGUI = new DebuggerDatGUI();
+		// this.debuggerDatGUI = new DebuggerDatGUI();
 		
 		// Axis Helper
 		// const axesHelper = new THREE.AxesHelper(500);

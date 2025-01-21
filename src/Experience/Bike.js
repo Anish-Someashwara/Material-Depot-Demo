@@ -182,13 +182,13 @@ export default class Bike {
 		const GlobalEnvTexture = envMaps[`${basePath}/NewGlobalEnvMap2.hdr`];
 		GlobalEnvTexture.name = "GlobalEnvMap";
 		this.envTexture = GlobalEnvTexture;
-		// this.scene.background = this.envTexture;
+		this.scene.background = this.envTexture;
 		this.scene.backgroundIntensity = 0.1;
 
 		// GUI setup
 		const gui = new GUI();
 		const params = {
-			useTexture: false, // Initial state (no texture)
+			useTexture: true, // Initial state (no texture)
 		};
 
 		// Add toggle for texture
@@ -513,6 +513,11 @@ export default class Bike {
 		
 		this.scene.add(this.bike);
 		// this.loaders.deactivateLoader();
+
+		setTimeout(() => {
+			document.getElementById('loading-overlay').style.display = 'none';
+			// document.getElementById('loader-bar').style.display = 'none';
+		}, 2000);
 
 		// Seat Viewing Angle
 		this.seatViewPoint = new THREE.Mesh(
